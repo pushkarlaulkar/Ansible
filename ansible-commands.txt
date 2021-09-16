@@ -1,0 +1,37 @@
+https://www.katacoda.com/jonatanblue/scenarios/1
+
+Put below in inventory.txt
+host01 ansible_ssh_user=ubuntu
+
+If multiple hosts present then you can group them as below
+[group]
+host01 ansible_ssh_user=ubuntu
+
+Run ansible ad-hoc commands
+
+ansible host01 -i inventory.txt -m command -a date
+
+ansible host01 -i inventory.txt -m command -a pwd
+
+ansible host01 -i inventory.txt -m command -a "nslookup 8.8.8.8"
+
+ansible host01 -i inventory.txt -m ping
+host01 | success >> {
+    "changed": false, 
+    "ping": "pong"
+}
+
+Run ansible ad-hoc commands on group of hosts
+ansible group -i inventory.txt -m command -a date
+
+ansible group -i inventory.txt -m command -a pwd
+
+ansible group -i inventory.txt -m command -a "nslookup 8.8.8.8"
+
+ansible group -i inventory.txt -m ping
+host01 | success >> {
+    "changed": false, 
+    "ping": "pong"
+}
+
+To disable host key checking go to /etc/ansible/ansible.cfg and uncomment host_key_checking = False line. Not recommended
