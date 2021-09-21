@@ -1,0 +1,17 @@
+---
+name: "DevOps Journey"
+sub: 900
+awesome: true
+pi: 3.14
+topics:
+  - DevOps
+  - Programming
+  - Linux
+playlist:
+  Docker:
+    link: nnionono
+    videos: 8
+  Ansible:
+    link: nwnwwi
+    videos: 10
+...

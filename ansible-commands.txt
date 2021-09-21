@@ -35,3 +35,25 @@ host01 | success >> {
 }
 
 To disable host key checking go to /etc/ansible/ansible.cfg and uncomment host_key_checking = False line. Not recommended
+
+######################################################################################################################
+
+Use --become option to run as sudo
+for e.g
+
+Put below in inventory.txt
+worker ansible_host=worker ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[workergroup]
+worker
+
+Run below command
+ansible worker -i inventory.txt -m command -a "apt update -y" --become
+
+or you can use group as well
+
+ansible workergroup -i inventory.txt -m command -a "apt update -y" --become
+
+To gather facts about a remote machine
+
+ansible worker -i inventory.txt -m setup
