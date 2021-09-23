@@ -1,0 +1,10 @@
+---
+- name: Sample Playbook - Executing "date" and "uptime" command
+  hosts: worker
+  tasks:
+    - name: Run "date" command
+    command: date
+        
+    - name: Run "uptime" command
+    command: uptime
+...
