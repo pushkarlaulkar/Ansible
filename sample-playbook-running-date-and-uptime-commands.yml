@@ -3,8 +3,14 @@
   hosts: worker
   tasks:
     - name: Run "date" command
-    command: date
+      command: date
+      register: dateoutput
+      
+    - debug: msg="{{ dateoutput.stdout_lines }}"
         
     - name: Run "uptime" command
-    command: uptime
+      command: uptime
+      register: uptimeoutput
+    
+    - debug: msg="{{ uptimeoutput.stdout_lines }}"
 ...
