@@ -1,6 +1,7 @@
 ---
 - name: Sample Playbook - Executing "date" and "uptime" command
   hosts: worker
+  gather_facts: no
   tasks:
     - name: Run "date" command
       command: date

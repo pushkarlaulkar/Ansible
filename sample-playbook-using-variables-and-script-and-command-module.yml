@@ -1,0 +1,27 @@
+---
+- name: "Sample PlayBook running different commands"
+  hosts: workergroup
+  gather_facts: no
+  become: true
+  vars:
+          var1: "Hello"
+
+  tasks:
+          - name: "Running echo command"
+            command: "echo {{ var1 }}"
+            register: out1
+
+          - debug: msg="{{ out1.stdout_lines }}"
+
+          - name: "Running script module"
+            script: "/root/hello.sh"
+            register: out2
+
+          - debug: msg="{{ out2.stdout_lines }}"
+
+          - name: "Running date command"
+            command: date
+            register: out3
+
+          - debug: msg="{{ out3.stdout_lines }}"
+...
