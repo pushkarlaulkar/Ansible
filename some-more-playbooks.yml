@@ -1,0 +1,39 @@
+---
+    - name: Some More PlayBook
+      hosts: all
+      gather_facts: no
+      become: true
+      vars:
+        - var1: "Hello"
+        - var2: 18
+      tasks:
+        - name: Date
+          command: date
+          register: o1
+          
+          notify: 
+            - firsthandler
+          
+        - debug: msg="{{ o1.stdout_lines }}"
+        
+        - name: Script
+          script: "./hello.sh"
+          register: o2
+          
+        - debug: msg="{{ o2.stdout_lines }}"
+        
+        - name: Print Variable
+          command: "echo {{ var2 }}"
+          register: o3
+          
+        - debug: msg="{{ o3.stdout_lines }}"
+        
+          when: var2 > 20
+          
+      handlers:
+        - name: firsthandler
+          command: uptime
+          register: o4
+          
+        - debug: msg="{{ o4.stdout_lines }}"
+...
