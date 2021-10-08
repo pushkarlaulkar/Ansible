@@ -1,0 +1,12 @@
+---
+    - name: Copy Module Example PlayBook
+      hosts: all
+      become: true
+      gather_facts: no
+      tasks:
+        - name: Using Copy Module
+          copy: "src:/root/hello.sh dest=/root"
+          register: o1
+          
+        - debug: msg="{{ o1 }}"
+...
