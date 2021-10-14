@@ -1,0 +1,25 @@
+---
+    - name: Sample PlayBook, notify handler
+      hosts: all
+      gather_facts: no
+      become: true
+      vars:
+        - var1: 18
+          var2: Hello
+      tasks:
+        - name: Date
+          command: date
+          register: o1
+          
+          notify:
+            - Uptime
+            
+        - debug: msg="{{ o1.stdout_lines }}"
+        
+      handlers:
+        - name: Uptime
+          command: uptime
+          register: o2
+          
+        - debug: msg="{{ o3.stdout_lines }}"
+...
