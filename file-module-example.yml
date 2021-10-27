@@ -1,0 +1,15 @@
+---
+    - name: File PlayBook
+    hosts: all
+    become: true
+    gather_facts: no
+    vars:
+        var1: 18
+        var2: Hello
+    tasks:
+        - name: Create File
+          file: "dest=/root/test.txt state=touch"
+          register: o1
+
+        - debug: msg="{{ o1 }}"
+...
