@@ -12,4 +12,10 @@
           register: o1
 
         - debug: msg="{{ o1 }}"
+        
+        - name: Create Directory
+          file: "dest=/root/testdir state=directory"
+          register: o2
+          
+        - debug: msg="{{ o2 }}"
 ...
