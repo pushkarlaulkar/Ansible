@@ -1,0 +1,29 @@
+---
+  - name: Archive
+  hosts: all 
+  become: true
+  tasks:
+    - name: App Server1
+      archive:
+        path: /usr/src/sysops/
+        dest: /opt/sysops/games.tar.gz
+        owner: tony
+        group: tony
+      when: ansible_facts['hostname'] == "stapp01"
+    
+    - name: App Server2
+      archive:
+        path: /usr/src/sysops/
+        dest: /opt/sysops/games.tar.gz
+        owner: steve
+        group: steve
+      when: ansible_facts['hostname'] == "stapp02"
+    
+    - name: App Server3
+      archive:
+        path: /usr/src/sysops/
+        dest: /opt/sysops/games.tar.gz
+        owner: banner
+        group: banner
+      when: ansible_facts['hostname'] == "stapp03"
+...
