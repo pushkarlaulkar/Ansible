@@ -1,0 +1,26 @@
+---
+  - name: Replace string in file
+  hosts: all
+  become: true
+  tasks:
+    - name: App Server1
+      replace:
+        path: /opt/data/blog.txt
+        regexp: 'xFusionCorp'
+        replace: "Nautilus"
+      when: ansible_facts['hostname'] == "stapp01"        
+
+    - name: App Server2
+      replace:
+        path: /opt/data/story.txt
+        regexp: 'Nautilus'
+        replace: "KodeKloud"
+      when: ansible_facts['hostname'] == "stapp02"
+    
+    - name: App Server3
+      replace:
+        path: /opt/data/media.txt
+        regexp: 'KodeKloud'
+        replace: "xFusionCorp Industries"
+      when: ansible_facts['hostname'] == "stapp03"
+...
