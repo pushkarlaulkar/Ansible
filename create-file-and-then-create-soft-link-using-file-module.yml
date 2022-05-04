@@ -1,0 +1,50 @@
+---
+  - name: Create soft links
+    hosts: all
+    become: true
+    tasks:
+      - name: App Server1
+        file:
+          path: /opt/sysops/blog.txt
+          owner: tony
+          group: tony
+          state: touch
+        when: ansible_facts['hostname'] == "stapp01"
+      
+      - name: App Server1
+        file:
+          src: /opt/sysops
+          dest: /var/www/html
+          state: link
+        when: ansible_facts['hostname'] == "stapp01"	  
+    
+      - name: App Server2
+        file:
+          path: /opt/sysops/story.txt
+          owner: steve
+          group: steve
+          state: touch
+        when: ansible_facts['hostname'] == "stapp02"
+
+      - name: App Server2
+        file:
+          src: /opt/sysops
+          dest: /var/www/html
+          state: link
+        when: ansible_facts['hostname'] == "stapp02"
+
+      - name: App Server3
+        file:
+          path: /opt/sysops/media.txt
+          owner: banner
+          group: banner
+          state: touch
+        when: ansible_facts['hostname'] == "stapp03"
+
+      - name: App Server3
+        file:
+          src: /opt/sysops
+          dest: /var/www/html
+          state: link
+        when: ansible_facts['hostname'] == "stapp03"
+...
